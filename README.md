@@ -19,6 +19,7 @@
 - JDK 21 instalado.
 - Eclipse IDE.
 - Git
+  
 **Importar el proyecto**
 1. Abrir Eclipse IDE.
 2. Seleccionar File y luego Import.
@@ -26,6 +27,7 @@
 4. Presionar Next.
 5. Seleccionar la carpeta raíz del proyecto.
 6. Presionar Finish y esperar a que Gradle descargue todas las dependencias.
+   
 **Ejecutar el proyecto**
 1. En el Package Explorer, expandir el proyecto lwjgl3.
 2. Abrir el paquete donde se encuentra la clase `Lwjgl3Launcher`.
