@@ -18,7 +18,7 @@
 3. Compilar y ejecutar la versión de escritorio.
 
 ## Estado Actual del Proyecto
--Configuración inicial y estructura del proyecto.
+Configuración inicial y estructura del proyecto.
 
 ## Enlace a la Wiki del Proyecto (Propuesta Detallada):
 [Ver la Propuesta Completa del Proyecto aquí](https://github.com/Gianfranco1212/PROYECTO-FINAL-Escape-of-the-Technical-School-/wiki/Propuesta-Formal-de-Proyecto-Final-%E2%80%90-%5BEscape-oh-the-Technical-School%5D)
