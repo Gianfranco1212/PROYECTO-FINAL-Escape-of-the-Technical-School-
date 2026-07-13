@@ -18,8 +18,6 @@ Todos los cambios importantes realizados en este proyecto serán documentados en
 
 ## [0.1.2] - 2026-07-13
 ### Fixed (Corregido)
--Correccion del archivo README.md, agregandole las tecnologías usadas, plataforma objetivo e instrucciones de ejecución paso a paso comprobables.
-
--Correccion del archivo CHANGELOG.md en cuanto al formato.
-
--Corrección de la Wiki del proyecto, estableciendo la propuesta formal como página principal, eliminando la página predeterminada de GitHub y organizando la documentación para mantenerla actualizada durante el desarrollo del proyecto.
+- Correccion del archivo README.md, agregandole las tecnologías usadas, plataforma objetivo e instrucciones de ejecución paso a paso comprobables.
+- Correccion del archivo CHANGELOG.md en cuanto al formato.
+- Corrección de la Wiki del proyecto, estableciendo la propuesta formal como página principal, eliminando la página predeterminada de GitHub y organizando la documentación para mantenerla actualizada durante el desarrollo del proyecto.
