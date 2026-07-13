@@ -19,7 +19,14 @@
 - JDK 21 instalado.
 - Eclipse IDE.
 - Git
-  
+
+**Clonacion del repositorio**
+1. Ingresar al repositorio en GitHub.
+2. Hacer clic en el botón Code.
+3. Copiar la URL del repositorio.
+4. Abrir Git Bash (Terminal de git).
+5. Ejecutar el siguiente comando, reemplazando la URL por la del repositorio: git clone <URL_DEL_REPOSITORIO>
+
 **Importar el proyecto**
 1. Abrir Eclipse IDE.
 2. Seleccionar File y luego Import.
