@@ -10,4 +10,4 @@
 - Archivo .gitignore
 
 ### Fixed (Corregido)
-- 
+- Modificacion en el archivo READ.ME, con el enlace de la Wiki
