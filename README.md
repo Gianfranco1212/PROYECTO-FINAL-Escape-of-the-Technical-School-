@@ -37,7 +37,7 @@
    
 **Ejecutar el proyecto**
 1. En el Package Explorer, expandir el proyecto lwjgl3.
-2. Abrir el paquete donde se encuentra la clase `Lwjgl3Launcher`.
+2. Abrir el paquete donde se encuentra la clase Lwjgl3Launcher.
 3. Hacer clic derecho sobre Lwjgl3Launcher.java.
 4. Seleccionar Run As y Java Application.
 
