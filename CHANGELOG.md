@@ -8,3 +8,6 @@
 - Proyecto LibGDX con todos sus archivos
 - Wiki con la "Propuesta Formal del Proyecto Final"
 - Archivo .gitignore
+
+### Fixed (Corregido)
+- 
