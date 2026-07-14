@@ -41,7 +41,6 @@
 3. Hacer clic derecho sobre Lwjgl3Launcher.java.
 4. Seleccionar Run As y Java Application.
 
-
 ## Estado Actual del Proyecto
 Configuración inicial y estructura del proyecto.
 
