@@ -23,22 +23,22 @@ Todos los cambios importantes realizados en este proyecto serán documentados en
 
 ## [0.2.0] - 2026-08-27
 ### Added (Añadido)
--Incorporación del mapa del primer nivel del juego, correspondiente a la Cantina de la escuela, creado mediante Tiled e integrado al proyecto con TmxMapLoader.
+- Incorporación del mapa del primer nivel del juego, correspondiente a la Cantina de la escuela, creado mediante Tiled e integrado al proyecto con TmxMapLoader.
 
--Incorporación del personaje principal al mapa mediante un sprite sheet.
+- Incorporación del personaje principal al mapa mediante un sprite sheet.
 
--Implementación de las animaciones del personaje para los estados quieto, caminando y saltando.
+- Implementación de las animaciones del personaje para los estados quieto, caminando y saltando.
 
--Implementación del movimiento horizontal del personaje mediante las teclas A y D.
+- Implementación del movimiento horizontal del personaje mediante las teclas A y D.
 
--Implementación del salto del personaje mediante la tecla W.
+- Implementación del salto del personaje mediante la tecla W.
 
--Incorporación de gravedad básica y detección provisoria del suelo para controlar el salto y la caída del personaje.
+- Incorporación de gravedad básica y detección provisoria del suelo para controlar el salto y la caída del personaje.
 
--Incorporación de un menú de inicio simple con el título del juego y acceso mediante la tecla ENTER.
+- Incorporación de un menú de inicio simple con el título del juego y acceso mediante la tecla ENTER.
 
--Incorporación de la clase Entrada para centralizar el manejo de las entradas del jugador.
+- Incorporación de la clase Entrada para centralizar el manejo de las entradas del jugador.
 
--Incorporación de la clase Mapa para administrar la carga y renderizado del mapa de Tiled.
+- Incorporación de la clase Mapa para administrar la carga y renderizado del mapa de Tiled.
 -Incorporación de la clase Personaje para administrar el movimiento, salto, gravedad y animaciones del personaje.
 -Incorporación de la clase MenuInicio para administrar y mostrar el menú inicial.
