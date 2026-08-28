@@ -40,5 +40,7 @@ Todos los cambios importantes realizados en este proyecto serán documentados en
 - Incorporación de la clase Entrada para centralizar el manejo de las entradas del jugador.
 
 - Incorporación de la clase Mapa para administrar la carga y renderizado del mapa de Tiled.
--Incorporación de la clase Personaje para administrar el movimiento, salto, gravedad y animaciones del personaje.
--Incorporación de la clase MenuInicio para administrar y mostrar el menú inicial.
+  
+- Incorporación de la clase Personaje para administrar el movimiento, salto, gravedad y animaciones del personaje.
+
+- Incorporación de la clase MenuInicio para administrar y mostrar el menú inicial.
