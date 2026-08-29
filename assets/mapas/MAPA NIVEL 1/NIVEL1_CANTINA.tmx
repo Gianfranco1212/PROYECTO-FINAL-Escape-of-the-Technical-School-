@@ -11,36 +11,116 @@
  </tileset>
  <tileset firstgid="4" name="piso cantina alto1" tilewidth="32" tileheight="32" tilecount="1" columns="1">
   <image source="piso cantina alto1.png" trans="000000" width="32" height="32"/>
+  <tile id="0">
+   <objectgroup draworder="index" id="2">
+    <object id="1" type="piso" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
  </tileset>
  <tileset firstgid="5" name="piso cantina bajo1" tilewidth="32" tileheight="32" tilecount="1" columns="1">
   <image source="piso cantina bajo1.png" trans="000000" width="32" height="32"/>
+  <tile id="0">
+   <objectgroup draworder="index" id="2">
+    <object id="1" type="piso" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
  </tileset>
  <tileset firstgid="6" name="plataforma elevatoria" tilewidth="32" tileheight="32" tilecount="2" columns="2">
   <image source="plataforma elevatoria.png" trans="847e87" width="64" height="32"/>
+  <tile id="0">
+   <objectgroup draworder="index" id="2">
+    <object id="1" type="elevador" x="0" y="15.9091" width="32" height="16.0909"/>
+   </objectgroup>
+  </tile>
+  <tile id="1">
+   <objectgroup draworder="index" id="2">
+    <object id="1" type="elevador" x="0" y="15.9091" width="32" height="16.0909"/>
+   </objectgroup>
+  </tile>
  </tileset>
  <tileset firstgid="8" name="boton rojo" tilewidth="32" tileheight="32" tilecount="1" columns="1">
   <image source="boton rojo.png" trans="847e87" width="32" height="32"/>
+  <tile id="0">
+   <objectgroup draworder="index" id="2">
+    <object id="1" type="boton" x="1" y="19" width="30" height="13"/>
+   </objectgroup>
+  </tile>
  </tileset>
  <tileset firstgid="9" name="boton azul" tilewidth="32" tileheight="32" tilecount="1" columns="1">
   <image source="boton azul.png" trans="847e87" width="32" height="32"/>
+  <tile id="0">
+   <objectgroup draworder="index" id="2">
+    <object id="1" type="boton" x="1" y="19" width="30" height="13"/>
+   </objectgroup>
+  </tile>
  </tileset>
  <tileset firstgid="10" name="moneda coin" tilewidth="32" tileheight="32" tilecount="1" columns="1">
   <image source="moneda coin.png" trans="847e87" width="32" height="32"/>
  </tileset>
  <tileset firstgid="11" name="mesa cantina" tilewidth="32" tileheight="32" tilecount="2" columns="2">
   <image source="mesa cantina.png" trans="847e87" width="64" height="32"/>
+  <tile id="0">
+   <objectgroup>
+    <object id="1" type="mesa" x="0" y="10" width="31" height="22"/>
+   </objectgroup>
+  </tile>
+  <tile id="1">
+   <objectgroup draworder="index" id="2">
+    <object id="1" type="mesa" x="0" y="10" width="31" height="22"/>
+   </objectgroup>
+  </tile>
  </tileset>
  <tileset firstgid="13" name="ventilador cantina" tilewidth="32" tileheight="32" tilecount="8" columns="4">
   <image source="ventilador cantina.png" trans="847e87" width="128" height="64"/>
  </tileset>
  <tileset firstgid="21" name="libros bloque" tilewidth="32" tileheight="32" tilecount="1" columns="1">
   <image source="libros bloque.png" trans="847e87" width="32" height="32"/>
+  <tile id="0">
+   <objectgroup draworder="index" id="2">
+    <object id="1" type="libro" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
  </tileset>
  <tileset firstgid="22" name="tablero" tilewidth="32" tileheight="32" tilecount="6" columns="3">
   <image source="tablero.png" trans="847e87" width="96" height="64"/>
+  <tile id="0">
+   <objectgroup draworder="index" id="2">
+    <object id="1" type="tablero" x="0" y="12" width="32" height="20"/>
+   </objectgroup>
+  </tile>
+  <tile id="1">
+   <objectgroup draworder="index" id="2">
+    <object id="1" type="tablero" x="0" y="10" width="32" height="22"/>
+   </objectgroup>
+  </tile>
+  <tile id="2">
+   <objectgroup draworder="index" id="2">
+    <object id="1" type="tablero" x="0" y="16" width="16" height="16"/>
+   </objectgroup>
+  </tile>
+  <tile id="3">
+   <objectgroup draworder="index" id="2">
+    <object id="1" type="tablero" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="4">
+   <objectgroup draworder="index" id="2">
+    <object id="1" type="tablero" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
+  <tile id="5">
+   <objectgroup draworder="index" id="2">
+    <object id="1" type="tablero" x="0" y="0" width="16" height="32"/>
+   </objectgroup>
+  </tile>
  </tileset>
  <tileset firstgid="28" name="bloque random" tilewidth="32" tileheight="32" tilecount="1" columns="1">
   <image source="bloque random.png" trans="847e87" width="32" height="32"/>
+  <tile id="0">
+   <objectgroup draworder="index" id="2">
+    <object id="1" type="bloque random" x="0" y="0" width="32" height="32"/>
+   </objectgroup>
+  </tile>
  </tileset>
  <tileset firstgid="29" name="puerta final" tilewidth="32" tileheight="32" tilecount="4" columns="2">
   <image source="puerta final.png" trans="847e87" width="64" height="64"/>
@@ -48,9 +128,19 @@
  <tileset firstgid="33" source="Sprite-puerta_roa.tsx"/>
  <tileset firstgid="34" name="Sprite-puerta_azul" tilewidth="16" tileheight="64" tilecount="1" columns="1">
   <image source="Sprite-puerta_azul.png" trans="847e87" width="16" height="64"/>
+  <tile id="0">
+   <objectgroup draworder="index" id="2">
+    <object id="1" type="puerta" x="1" y="1" width="14" height="62"/>
+   </objectgroup>
+  </tile>
  </tileset>
  <tileset firstgid="35" name="boton elevadores" tilewidth="32" tileheight="32" tilecount="1" columns="1">
   <image source="boton elevadores.png" trans="847e87" width="32" height="32"/>
+  <tile id="0">
+   <objectgroup draworder="index" id="2">
+    <object id="1" type="boton" x="1" y="19" width="30" height="13"/>
+   </objectgroup>
+  </tile>
  </tileset>
  <tileset firstgid="36" name="llave" tilewidth="32" tileheight="32" tilecount="1" columns="1">
   <image source="llave.png" trans="847e87" width="32" height="32"/>
@@ -128,32 +218,5 @@
 5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5
 </data>
  </layer>
- <objectgroup id="6" name="colisiones">
-  <object id="12" x="1050.67" y="-182.667"/>
-  <object id="18" name="piso" type="piso" x="0.666667" y="223.333" width="416" height="32"/>
-  <object id="21" name="piso" x="0" y="384.333" width="191.667" height="31"/>
-  <object id="22" name="piso" x="320.364" y="384.182" width="95.2727" height="31.6364"/>
-  <object id="24" name="piso" x="704.25" y="384.25" width="63.25" height="31.25"/>
-  <object id="25" name="piso" x="832.333" y="479.667" width="127.667" height="32.6667"/>
-  <object id="26" name="piso" x="800.333" y="192" width="128" height="31.6667"/>
-  <object id="27" name="piso" x="800.25" y="96" width="159.75" height="31.5"/>
-  <object id="32" name="piso" x="672.25" y="224" width="31.75" height="32"/>
-  <object id="33" name="piso" x="608" y="256.25" width="32.25" height="31.5"/>
-  <object id="34" name="piso" x="736.25" y="224" width="31.75" height="31.5"/>
-  <object id="35" name="piso" x="0" y="576" width="960" height="64.1818"/>
-  <object id="36" name="tablero" x="-0.25" y="527.5" width="79.75" height="48"/>
-  <object id="37" name="libro" x="96" y="543.75" width="32.5" height="32"/>
-  <object id="38" name="libro" x="896" y="32.5" width="63.5" height="62.75"/>
-  <object id="39" name="libro" x="864.5" y="64.5" width="31" height="31"/>
-  <object id="41" name="boton" x="864.75" y="178.125" width="30.25" height="13"/>
-  <object id="42" name="boton" x="640" y="561.125" width="32.125" height="15"/>
-  <object id="43" name="boton" x="31.8182" y="369.636" width="32.1818" height="14.5455"/>
-  <object id="45" name="elevador" x="192.182" y="399.273" width="63.6364" height="16.7273"/>
-  <object id="46" name="elevador" x="479.636" y="399.636" width="64.3636" height="15.8182"/>
-  <object id="48" name="mesa" x="544.182" y="552.909" width="64.1818" height="22.7273"/>
-  <object id="49" name="mesa" x="320.5" y="553" width="63.75" height="22.75"/>
-  <object id="50" name="tablero" x="288.182" y="175.273" width="80" height="47.8182"/>
-  <object id="52" name="puerta roja" x="832.5" y="512.25" width="14.75" height="63.25"/>
-  <object id="53" name="puerta azul" x="800.364" y="128" width="13.8182" height="63.0909"/>
- </objectgroup>
+ <objectgroup id="6" name="colisiones"/>
 </map>
