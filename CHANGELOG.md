@@ -44,3 +44,23 @@ Todos los cambios importantes realizados en este proyecto serán documentados en
 - Incorporación de la clase Personaje para administrar el movimiento, salto, gravedad y animaciones del personaje.
 
 - Incorporación de la clase MenuInicio para administrar y mostrar el menú inicial.
+
+## [0.3.0] - 2026-08-28
+
+### Added (Añadido)
+- Incorporación de colisiones del mapa mediante objetos definidos en Tiled, permitiendo que los personajes se apoyen sobre el suelo y las plataformas.
+
+- Implementación de límites de pantalla para evitar que los personajes puedan salir del área visible del nivel.
+
+- Incorporación del segundo personaje jugable `Gian`.
+
+- Implementación de dos personajes jugables simultáneamente dentro del mismo nivel.
+
+- Incorporación de posiciones iniciales diferentes para AZN y Gian sobre las mesas del nivel.
+
+- Implementación de colisiones entre los dos personajes para evitar que puedan atravesarse entre sí.
+
+
+
+
+
