@@ -9,54 +9,60 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class MenuInicio {
+public class MenuPausa {
 
-    private Texture imagenMenu;
+    private Texture imagenPausa;
 
-    private boolean activo;
-
-    private Rectangle botonJugar;
+    private Rectangle botonReanudar;
+    private Rectangle botonReiniciar;
     private Rectangle botonAjustes;
-    private Rectangle botonSalir;
+    private Rectangle botonMenuPrincipal;
 
     public enum Accion {
         NINGUNA,
-        JUGAR,
+        REANUDAR,
+        REINICIAR,
         AJUSTES,
-        SALIR
+        MENU_PRINCIPAL
     }
 
-    public MenuInicio() {
+    public MenuPausa() {
 
-        imagenMenu =
+        imagenPausa =
             new Texture(
-                "menus/menuInicio.png"
+                "menus/menu_pausa_nivel.png"
             );
 
-        activo = true;
-
-        botonJugar =
+        botonReanudar =
             new Rectangle(
-                322,
-                275,
-                287,
-                65
+                364,
+                343,
+                235,
+                48
+            );
+
+        botonReiniciar =
+            new Rectangle(
+                364,
+                291,
+                235,
+                46
             );
 
         botonAjustes =
             new Rectangle(
-                322,
-                200,
-                287,
-                65
+                364,
+                238,
+                235,
+                46
             );
 
-        botonSalir =
+        botonMenuPrincipal =
             new Rectangle(
-                322,
-                125,
-                287,
-                65
+                364,
+                180,
+                235,
+                48
             );
     }
 
@@ -72,11 +78,11 @@ public class MenuInicio {
         batch.begin();
 
         batch.draw(
-            imagenMenu,
-            0,
-            39,
-            960,
-            562
+            imagenPausa,
+            174,
+            116,
+            612,
+            408
         );
 
         batch.end();
@@ -106,11 +112,19 @@ public class MenuInicio {
         );
 
         if (
-            botonJugar.contains(
+            botonReanudar.contains(
                 mouse
             )
         ) {
-            return Accion.JUGAR;
+            return Accion.REANUDAR;
+        }
+
+        if (
+            botonReiniciar.contains(
+                mouse
+            )
+        ) {
+            return Accion.REINICIAR;
         }
 
         if (
@@ -122,29 +136,17 @@ public class MenuInicio {
         }
 
         if (
-            botonSalir.contains(
+            botonMenuPrincipal.contains(
                 mouse
             )
         ) {
-            return Accion.SALIR;
+            return Accion.MENU_PRINCIPAL;
         }
 
         return Accion.NINGUNA;
     }
 
-    public boolean estaActivo() {
-        return activo;
-    }
-
-    public void cerrar() {
-        activo = false;
-    }
-
-    public void abrir() {
-        activo = true;
-    }
-
     public void dispose() {
-        imagenMenu.dispose();
+        imagenPausa.dispose();
     }
 }

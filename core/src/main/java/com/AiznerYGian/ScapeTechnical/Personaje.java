@@ -50,6 +50,10 @@ public abstract class Personaje {
     protected int teclaDerecha;
     protected int teclaSalto;
 
+    protected Audio audio;
+
+    protected int numeroJugador;
+
     protected final float ANCHO_PANTALLA = 960;
     protected final float ALTO_PANTALLA = 640;
 
@@ -62,293 +66,502 @@ public abstract class Personaje {
         float fuerzaSalto,
         int teclaIzquierda,
         int teclaDerecha,
-        int teclaSalto
+        int teclaSalto,
+        Audio audio,
+        int numeroJugador
     ) {
 
         this.mapa = mapa;
 
-        spriteSheet = new Texture(rutaSprite);
+        this.audio = audio;
 
-        ancho = mapa.getAnchoTile();
-        alto = mapa.getAltoTile() * 2;
+        this.numeroJugador =
+            numeroJugador;
+
+        spriteSheet =
+            new Texture(
+                rutaSprite
+            );
+
+        ancho =
+            mapa.getAnchoTile();
+
+        alto =
+            mapa.getAltoTile() * 2;
 
         x = xInicial;
         y = yInicial;
 
-        this.velocidad = velocidad;
+        this.velocidad =
+            velocidad;
 
         velocidadY = 0;
 
         gravedad = -900f;
 
-        this.fuerzaSalto = fuerzaSalto;
+        this.fuerzaSalto =
+            fuerzaSalto;
 
-        this.teclaIzquierda = teclaIzquierda;
-        this.teclaDerecha = teclaDerecha;
-        this.teclaSalto = teclaSalto;
+        this.teclaIzquierda =
+            teclaIzquierda;
+
+        this.teclaDerecha =
+            teclaDerecha;
+
+        this.teclaSalto =
+            teclaSalto;
 
         enElSuelo = false;
 
         stateTime = 0;
 
-        hitbox = new Rectangle(
-            x,
-            y,
-            ancho,
-            alto
-        );
+        hitbox =
+            new Rectangle(
+                x,
+                y,
+                ancho,
+                alto
+            );
     }
 
     protected abstract void crearSprites();
 
     public void actualizar(
-    	    Entrada entrada,
-    	    Personaje otroPersonaje
-    	) {
+        Entrada entrada,
+        Personaje otroPersonaje
+    ) {
 
-    	    float delta = Gdx.graphics.getDeltaTime();
+        float delta =
+            Gdx.graphics.getDeltaTime();
 
-    	    moverHorizontal(
-    	        entrada,
-    	        delta,
-    	        otroPersonaje
-    	    );
+        moverHorizontal(
+            entrada,
+            delta,
+            otroPersonaje
+        );
 
-    	    aplicarGravedad(
-    	        delta,
-    	        otroPersonaje
-    	    );
+        aplicarGravedad(
+            delta,
+            otroPersonaje
+        );
 
-    	    saltar(entrada);
+        saltar(
+            entrada
+        );
 
-    	    frameActual =
-    	        obtenerFrame(entrada);
-    	}
+        actualizarSonidoPasos(
+            entrada
+        );
+
+        frameActual =
+            obtenerFrame(
+                entrada
+            );
+    }
 
     private void moverHorizontal(
-    	    Entrada entrada,
-    	    float delta,
-    	    Personaje otroPersonaje
-    	) {
+        Entrada entrada,
+        float delta,
+        Personaje otroPersonaje
+    ) {
 
-    	    float movimientoX = 0;
-
-    	    if (
-    	        entrada.teclaPresionada(
-    	            teclaIzquierda
-    	        )
-    	    ) {
-
-    	        movimientoX =
-    	            -velocidad * delta;
-    	    }
-
-    	    if (
-    	        entrada.teclaPresionada(
-    	            teclaDerecha
-    	        )
-    	    ) {
-
-    	        movimientoX =
-    	            velocidad * delta;
-    	    }
-
-    	    if (movimientoX == 0) {
-    	        return;
-    	    }
-
-    	    float xAnterior = x;
-
-    	    x += movimientoX;
-
-    	    if (x < 0) {
-    	        x = 0;
-    	    }
-
-    	    if (
-    	        x + ancho
-    	        > ANCHO_PANTALLA
-    	    ) {
-
-    	        x =
-    	            ANCHO_PANTALLA
-    	            - ancho;
-    	    }
-
-    	    actualizarHitbox();
-
-    	    // COLISION CON EL MAPA
-    	    for (
-    	        Rectangle colision :
-    	        mapa.getColisiones()
-    	    ) {
-
-    	        if (
-    	            hitbox.overlaps(colision)
-    	        ) {
-
-    	            x = xAnterior;
-
-    	            actualizarHitbox();
-
-    	            break;
-    	        }
-    	    }
-
-    	    // COLISION CON EL OTRO PERSONAJE
-    	    if (
-    	        otroPersonaje != null
-    	        && hitbox.overlaps(
-    	            otroPersonaje.getHitbox()
-    	        )
-    	    ) {
-
-    	        x = xAnterior;
-
-    	        actualizarHitbox();
-    	    }
-
-    	    if (enElSuelo) {
-    	        stateTime += delta;
-    	    }
-    	}
-    private void aplicarGravedad(
-    	    float delta,
-    	    Personaje otroPersonaje
-    	) {
-
-    	    velocidadY +=
-    	        gravedad * delta;
-
-    	    float movimientoY =
-    	        velocidadY * delta;
-
-    	    float yAnterior = y;
-
-    	    y += movimientoY;
-
-    	    if (y < 0) {
-
-    	        y = 0;
-
-    	        velocidadY = 0;
-
-    	        enElSuelo = true;
-    	    }
-
-    	    if (
-    	        y + alto
-    	        > ALTO_PANTALLA
-    	    ) {
-
-    	        y =
-    	            ALTO_PANTALLA
-    	            - alto;
-
-    	        velocidadY = 0;
-    	    }
-
-    	    actualizarHitbox();
-
-    	    enElSuelo = false;
-
-    	    // COLISION VERTICAL CON EL MAPA
-    	    for (
-    	        Rectangle colision :
-    	        mapa.getColisiones()
-    	    ) {
-
-    	        if (
-    	            hitbox.overlaps(colision)
-    	        ) {
-
-    	            if (movimientoY < 0) {
-
-    	                y =
-    	                    colision.y
-    	                    + colision.height;
-
-    	                velocidadY = 0;
-
-    	                enElSuelo = true;
-    	            }
-
-    	            else if (
-    	                movimientoY > 0
-    	            ) {
-
-    	                y =
-    	                    colision.y
-    	                    - alto;
-
-    	                velocidadY = 0;
-    	            }
-
-    	            actualizarHitbox();
-    	        }
-    	    }
-
-    	    // COLISION VERTICAL CON EL OTRO PERSONAJE
-    	    if (
-    	        otroPersonaje != null
-    	        && hitbox.overlaps(
-    	            otroPersonaje.getHitbox()
-    	        )
-    	    ) {
-
-    	        if (movimientoY < 0) {
-
-    	            y =
-    	                otroPersonaje.getY()
-    	                + otroPersonaje.getAlto();
-
-    	            velocidadY = 0;
-
-    	            enElSuelo = true;
-    	        }
-
-    	        else if (
-    	            movimientoY > 0
-    	        ) {
-
-    	            y =
-    	                otroPersonaje.getY()
-    	                - alto;
-
-    	            velocidadY = 0;
-    	        }
-
-    	        actualizarHitbox();
-    	    }
-
-    	    if (y <= 0) {
-
-    	        y = 0;
-
-    	        velocidadY = 0;
-
-    	        enElSuelo = true;
-
-    	        actualizarHitbox();
-    	    }
-
-    	    if (!enElSuelo) {
-    	        stateTime += delta;
-    	    }
-    	}
-
-    private void saltar(Entrada entrada) {
+        float movimientoX = 0;
 
         if (
-            entrada.teclaJustoPresionada(teclaSalto)
-            && enElSuelo
+            entrada.teclaPresionada(
+                teclaIzquierda
+            )
         ) {
 
-            velocidadY = fuerzaSalto;
+            movimientoX =
+                -velocidad * delta;
+        }
+
+        if (
+            entrada.teclaPresionada(
+                teclaDerecha
+            )
+        ) {
+
+            movimientoX =
+                velocidad * delta;
+        }
+
+        if (movimientoX == 0) {
+            return;
+        }
+
+        float xAnterior = x;
+
+        x += movimientoX;
+
+        if (x < 0) {
+            x = 0;
+        }
+
+        if (
+            x + ancho
+            > ANCHO_PANTALLA
+        ) {
+
+            x =
+                ANCHO_PANTALLA
+                - ancho;
+        }
+
+        actualizarHitbox();
+
+        for (
+            Rectangle colision :
+            mapa.getColisiones()
+        ) {
+
+            if (
+                hitbox.overlaps(
+                    colision
+                )
+            ) {
+
+                x = xAnterior;
+
+                actualizarHitbox();
+
+                break;
+            }
+        }
+
+        if (
+            mapa.colisionaConPuerta(
+                hitbox
+            )
+        ) {
+
+            x = xAnterior;
+
+            actualizarHitbox();
+        }
+
+        if (
+            otroPersonaje != null
+            &&
+            hitbox.overlaps(
+                otroPersonaje.getHitbox()
+            )
+        ) {
+
+            x = xAnterior;
+
+            actualizarHitbox();
+        }
+
+        if (enElSuelo) {
+
+            stateTime += delta;
+        }
+    }
+
+    private void aplicarGravedad(
+        float delta,
+        Personaje otroPersonaje
+    ) {
+
+        velocidadY +=
+            gravedad * delta;
+
+        float movimientoY =
+            velocidadY * delta;
+
+        float yAnterior =
+            y;
+
+        y += movimientoY;
+
+        actualizarHitbox();
+
+        enElSuelo = false;
+
+        for (
+            Rectangle colision :
+            mapa.getColisiones()
+        ) {
+
+            boolean coincideHorizontalmente =
+                hitbox.x
+                + hitbox.width
+                > colision.x
+                &&
+                hitbox.x
+                < colision.x
+                + colision.width;
+
+            if (
+                !coincideHorizontalmente
+            ) {
+                continue;
+            }
+
+            float piesAnteriores =
+                yAnterior;
+
+            float piesActuales =
+                y;
+
+            float cabezaAnterior =
+                yAnterior
+                + alto;
+
+            float cabezaActual =
+                y
+                + alto;
+
+            float parteSuperiorBloque =
+                colision.y
+                + colision.height;
+
+            float parteInferiorBloque =
+                colision.y;
+
+            if (
+                movimientoY < 0
+                &&
+                piesAnteriores
+                >= parteSuperiorBloque
+                &&
+                piesActuales
+                <= parteSuperiorBloque
+            ) {
+
+                y =
+                    parteSuperiorBloque;
+
+                velocidadY = 0;
+
+                enElSuelo = true;
+
+                actualizarHitbox();
+
+                break;
+            }
+
+            if (
+                movimientoY > 0
+                &&
+                cabezaAnterior
+                <= parteInferiorBloque
+                &&
+                cabezaActual
+                >= parteInferiorBloque
+            ) {
+
+                y =
+                    parteInferiorBloque
+                    - alto;
+
+                velocidadY = 0;
+
+                actualizarHitbox();
+
+                break;
+            }
+        }
+
+        comprobarAscensor(
+            mapa.getHitboxAscensorIzquierdo(),
+            movimientoY,
+            yAnterior
+        );
+
+        comprobarAscensor(
+            mapa.getHitboxAscensorDerecho(),
+            movimientoY,
+            yAnterior
+        );
+
+        if (
+            otroPersonaje != null
+            &&
+            hitbox.overlaps(
+                otroPersonaje.getHitbox()
+            )
+        ) {
+
+            if (
+                movimientoY < 0
+                &&
+                yAnterior
+                >= otroPersonaje.getY()
+                + otroPersonaje.getAlto()
+            ) {
+
+                y =
+                    otroPersonaje.getY()
+                    + otroPersonaje.getAlto();
+
+                velocidadY = 0;
+
+                enElSuelo = true;
+            }
+
+            else if (
+                movimientoY > 0
+                &&
+                yAnterior + alto
+                <= otroPersonaje.getY()
+            ) {
+
+                y =
+                    otroPersonaje.getY()
+                    - alto;
+
+                velocidadY = 0;
+            }
+
+            actualizarHitbox();
+        }
+
+        if (y <= 0) {
+
+            y = 0;
+
+            velocidadY = 0;
+
+            enElSuelo = true;
+
+            actualizarHitbox();
+        }
+
+        if (
+            y + alto
+            > ALTO_PANTALLA
+        ) {
+
+            y =
+                ALTO_PANTALLA
+                - alto;
+
+            velocidadY = 0;
+
+            actualizarHitbox();
+        }
+
+        if (!enElSuelo) {
+
+            stateTime += delta;
+        }
+    }
+
+    private void comprobarAscensor(
+        Rectangle ascensor,
+        float movimientoY,
+        float yAnterior
+    ) {
+
+        if (
+            ascensor == null
+        ) {
+
+            return;
+        }
+
+        boolean horizontal =
+            hitbox.x
+            + hitbox.width
+            > ascensor.x
+            &&
+            hitbox.x
+            < ascensor.x
+            + ascensor.width;
+
+        if (!horizontal) {
+            return;
+        }
+
+        float parteSuperiorAscensor =
+            ascensor.y
+            + ascensor.height;
+
+        float piesAnteriores =
+            yAnterior;
+
+        float piesActuales =
+            y;
+
+        if (
+            movimientoY <= 0
+            &&
+            piesAnteriores
+            >= parteSuperiorAscensor - 5f
+            &&
+            piesActuales
+            <= parteSuperiorAscensor
+        ) {
+
+            y =
+                parteSuperiorAscensor;
+
+            velocidadY = 0;
+
+            enElSuelo = true;
+
+            actualizarHitbox();
+        }
+    }
+
+    private void saltar(
+        Entrada entrada
+    ) {
+
+        if (
+            entrada.teclaJustoPresionada(
+                teclaSalto
+            )
+            &&
+            enElSuelo
+        ) {
+
+            velocidadY =
+                fuerzaSalto;
 
             enElSuelo = false;
 
             stateTime = 0;
+
+            audio.detenerPasos(
+                numeroJugador
+            );
+
+            audio.reproducirSalto();
+        }
+    }
+
+    private void actualizarSonidoPasos(
+        Entrada entrada
+    ) {
+
+        boolean moviendose =
+            entrada.teclaPresionada(
+                teclaIzquierda
+            )
+            ||
+            entrada.teclaPresionada(
+                teclaDerecha
+            );
+
+        if (
+            moviendose
+            &&
+            enElSuelo
+        ) {
+
+            audio.iniciarPasos(
+                numeroJugador
+            );
+
+        } else {
+
+            audio.detenerPasos(
+                numeroJugador
+            );
         }
     }
 
@@ -368,33 +581,57 @@ public abstract class Personaje {
 
         if (!enElSuelo) {
 
-            if (stateTime < 0.15f) {
+            if (
+                stateTime < 0.15f
+            ) {
                 return salto1;
             }
 
-            if (stateTime < 0.30f) {
+            if (
+                stateTime < 0.30f
+            ) {
                 return salto2;
             }
 
-            if (stateTime < 0.45f) {
+            if (
+                stateTime < 0.45f
+            ) {
                 return salto3;
             }
 
             return salto4;
         }
 
-        if (entrada.teclaPresionada(teclaIzquierda)) {
+        if (
+            entrada.teclaPresionada(
+                teclaIzquierda
+            )
+        ) {
 
-            if ((int) (stateTime * 8) % 2 == 0) {
+            if (
+                (int) (
+                    stateTime * 8
+                ) % 2 == 0
+            ) {
+
                 return caminarIzquierda1;
             }
 
             return caminarIzquierda2;
         }
 
-        if (entrada.teclaPresionada(teclaDerecha)) {
+        if (
+            entrada.teclaPresionada(
+                teclaDerecha
+            )
+        ) {
 
-            if ((int) (stateTime * 8) % 2 == 0) {
+            if (
+                (int) (
+                    stateTime * 8
+                ) % 2 == 0
+            ) {
+
                 return caminarDerecha1;
             }
 
@@ -405,53 +642,81 @@ public abstract class Personaje {
     }
 
     public void dibujar(
-    	    SpriteBatch batch,
-    	    OrthographicCamera camera
-    	) {
+        SpriteBatch batch,
+        OrthographicCamera camera
+    ) {
 
-    	    batch.setProjectionMatrix(camera.combined);
+        batch.setProjectionMatrix(
+            camera.combined
+        );
 
-    	    batch.enableBlending();
+        batch.enableBlending();
 
-    	    batch.begin();
+        batch.begin();
 
-    	    float offsetY = 0;
+        float offsetY = 0;
 
-    	    if (this instanceof Gian) {
-    	        offsetY = -3f;
-    	    }
+        if (
+            this instanceof Gian
+        ) {
 
-    	    batch.draw(
-    	    	    frameActual,
-    	    	    x,
-    	    	    y + offsetY,
-    	    	    ancho,
-    	    	    alto
-    	    	);
+            offsetY = -3f;
+        }
 
-    	    batch.end();
-    	}
+        batch.draw(
+            frameActual,
+            x,
+            y + offsetY,
+            ancho,
+            alto
+        );
 
-    public void dispose() {
-        spriteSheet.dispose();
+        batch.end();
     }
+
+    public void moverConAscensor(
+        float movimientoY
+    ) {
+
+        y += movimientoY;
+
+        hitbox.setPosition(
+            x,
+            y
+        );
+    }
+
     public Rectangle getHitbox() {
+
         return hitbox;
     }
 
     public float getX() {
+
         return x;
     }
 
     public float getY() {
+
         return y;
     }
 
     public float getAncho() {
+
         return ancho;
     }
 
     public float getAlto() {
+
         return alto;
+    }
+
+    public void dispose() {
+
+        audio.detenerPasos(
+            numeroJugador
+        );
+
+        spriteSheet.dispose();
     }
 }
