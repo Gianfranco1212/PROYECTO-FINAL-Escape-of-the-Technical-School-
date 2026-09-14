@@ -90,3 +90,6 @@ Además, el prototipo cuenta con HUD, música, efectos de sonido, menú principa
 
 ## Enlace a la Wiki del Proyecto (Propuesta Detallada):
 [Ver la Propuesta Completa del Proyecto aquí](https://github.com/Gianfranco1212/PROYECTO-FINAL-Escape-of-the-Technical-School-/wiki/Propuesta-Formal-de-Proyecto-Final-%E2%80%90-%5BEscape-oh-the-Technical-School%5D)
+
+## Enlace al video de la segunda pre-entrega:
+https://youtu.be/t5v-8ZPyPto
