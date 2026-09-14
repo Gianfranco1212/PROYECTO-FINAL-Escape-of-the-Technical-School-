@@ -120,17 +120,7 @@ Todos los cambios importantes realizados en este proyecto serán documentados en
 - Corrección de los límites del nivel para evitar que los personajes salgan del área jugable.
   
 - Corrección de las colisiones entre los dos personajes.
-  
-- Corrección del movimiento de los personajes sobre los ascensores para que acompañen el desplazamiento de la plataforma.
-  
-- Corrección de las colisiones de las puertas para evitar que continúen bloqueando el paso luego de abrirse.
-  
-- Corrección de la detección de los botones de las puertas para activarlos cuando un personaje se encuentra sobre ellos.
-  
-- Corrección de la carga de recursos del mapa de Tiled y de las referencias a los archivos utilizados por los tilesets.
-  
-- Corrección del tamaño y posicionamiento del HUD al modificar el tamaño de la ventana.
-  
+
 - Corrección de la animación del personaje para mostrar correctamente los estados quieto, caminando y saltando.
 
 
