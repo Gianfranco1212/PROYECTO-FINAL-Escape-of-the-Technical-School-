@@ -64,7 +64,6 @@
 - Música y efectos de sonido.
 - Reinicio del nivel.
 - Condición de victoria cuando ambos jugadores llegan juntos a la salida.
-- Organización del código en diferentes clases para separar personajes, movimiento, animaciones, mapa, colisiones, recolectables y mecanismos.
 
 ## Controles
 
