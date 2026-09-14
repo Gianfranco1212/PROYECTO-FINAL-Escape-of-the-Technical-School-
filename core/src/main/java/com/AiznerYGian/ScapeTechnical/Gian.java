@@ -37,19 +37,21 @@ public class Gian extends Personaje {
 
         crearSprites();
 
-        frameActual = idle;
+        frameActual =
+            idle;
     }
 
     @Override
     protected void crearSprites() {
 
-        idle = new TextureRegion(
-            spriteSheet,
-            40,
-            40,
-            250,
-            380
-        );
+        idle =
+            new TextureRegion(
+                spriteSheet,
+                40,
+                40,
+                250,
+                380
+            );
 
         caminarIzquierda1 =
             new TextureRegion(

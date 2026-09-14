@@ -9,7 +9,9 @@ import com.badlogic.gdx.math.Rectangle;
 public class PuertaFinal {
 
     private Texture imagenAbierta;
+
     private TiledMapTileLayer capaCerrada;
+
     private Rectangle hitbox;
 
     private boolean abierta;
@@ -19,40 +21,52 @@ public class PuertaFinal {
         Rectangle hitbox
     ) {
 
-        this.capaCerrada = capaCerrada;
-        this.hitbox = new Rectangle(hitbox);
+        this.capaCerrada =
+            capaCerrada;
 
-        imagenAbierta = new Texture(
-        	    "mapas/MAPA NIVEL 1/puerta_final_abierta.png"
-        	);
+        this.hitbox =
+            new Rectangle(
+                hitbox
+            );
 
-        abierta = false;
+        imagenAbierta =
+            new Texture(
+                "mapas/MAPA NIVEL 1/puerta_final_abierta.png"
+            );
+
+        abierta =
+            false;
     }
 
     public void abrir() {
 
-        if (abierta) {
+        if (
+            abierta
+        ) {
+
             return;
         }
 
-        abierta = true;
+        abierta =
+            true;
 
-        capaCerrada.setVisible(false);
-
-        System.out.println(
-            "PUERTA FINAL ABIERTA"
+        capaCerrada.setVisible(
+            false
         );
     }
 
     public boolean estaAbierta() {
+
         return abierta;
     }
 
     public boolean bloqueaPaso() {
+
         return !abierta;
     }
 
     public Rectangle getHitbox() {
+
         return hitbox;
     }
 
@@ -61,7 +75,10 @@ public class PuertaFinal {
         OrthographicCamera camera
     ) {
 
-        if (!abierta) {
+        if (
+            !abierta
+        ) {
+
             return;
         }
 
@@ -84,9 +101,12 @@ public class PuertaFinal {
 
     public void reiniciar() {
 
-        abierta = false;
+        abierta =
+            false;
 
-        capaCerrada.setVisible(true);
+        capaCerrada.setVisible(
+            true
+        );
     }
 
     public void dispose() {

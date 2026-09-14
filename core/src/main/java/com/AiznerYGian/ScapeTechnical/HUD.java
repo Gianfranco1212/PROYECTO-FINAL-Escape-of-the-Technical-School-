@@ -46,11 +46,14 @@ public class HUD {
             1.3f
         );
 
-        tiempo = 0;
+        tiempo =
+            0;
 
-        monedas = 0;
+        monedas =
+            0;
 
-        tieneLlave = false;
+        tieneLlave =
+            false;
     }
 
     public void actualizar() {
@@ -77,10 +80,12 @@ public class HUD {
             (int) tiempo;
 
         int minutos =
-            segundosTotales / 60;
+            segundosTotales
+            / 60;
 
         int segundos =
-            segundosTotales % 60;
+            segundosTotales
+            % 60;
 
         String tiempoTexto =
             String.format(
@@ -95,11 +100,13 @@ public class HUD {
             tieneLlave
         ) {
 
-            llaveTexto = "SI";
+            llaveTexto =
+                "SI";
 
         } else {
 
-            llaveTexto = "NO";
+            llaveTexto =
+                "NO";
         }
 
         fuente.draw(
@@ -155,11 +162,14 @@ public class HUD {
 
     public void reiniciar() {
 
-        tiempo = 0;
+        tiempo =
+            0;
 
-        monedas = 0;
+        monedas =
+            0;
 
-        tieneLlave = false;
+        tieneLlave =
+            false;
     }
 
     public int getMonedas() {

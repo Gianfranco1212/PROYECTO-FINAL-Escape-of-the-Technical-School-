@@ -28,34 +28,41 @@ public class Puerta {
         Rectangle hitbox
     ) {
 
-        this.capa = capa;
-        this.hitbox = new Rectangle(hitbox);
+        this.capa =
+            capa;
 
-        yInicial = hitbox.y;
+        this.hitbox =
+            new Rectangle(
+                hitbox
+            );
+
+        yInicial =
+            hitbox.y;
 
         yAbierta =
             yInicial
             + hitbox.height
             + 20f;
 
-        velocidad = 120f;
+        velocidad =
+            120f;
 
-        tiempoAbierta = 0f;
+        tiempoAbierta =
+            0f;
 
-        estado = Estado.CERRADA;
+        estado =
+            Estado.CERRADA;
     }
 
     public void activar() {
 
         if (
-            estado == Estado.CERRADA
+            estado
+            == Estado.CERRADA
         ) {
 
-            System.out.println(
-                "PUERTA COMIENZA A ABRIR"
-            );
-
-            estado = Estado.ABRIENDO;
+            estado =
+                Estado.ABRIENDO;
         }
     }
 
@@ -64,14 +71,17 @@ public class Puerta {
     ) {
 
         if (
-            estado == Estado.ABRIENDO
+            estado
+            == Estado.ABRIENDO
         ) {
 
             hitbox.y +=
-                velocidad * delta;
+                velocidad
+                * delta;
 
             if (
-                hitbox.y >= yAbierta
+                hitbox.y
+                >= yAbierta
             ) {
 
                 hitbox.y =
@@ -82,41 +92,39 @@ public class Puerta {
 
                 estado =
                     Estado.ABIERTA;
-
-                System.out.println(
-                    "PUERTA ABIERTA"
-                );
             }
         }
 
         else if (
-            estado == Estado.ABIERTA
+            estado
+            == Estado.ABIERTA
         ) {
 
-            tiempoAbierta += delta;
+            tiempoAbierta +=
+                delta;
 
             if (
-                tiempoAbierta >= 7f
+                tiempoAbierta
+                >= 7f
             ) {
 
                 estado =
                     Estado.CERRANDO;
-
-                System.out.println(
-                    "PUERTA COMIENZA A CERRAR"
-                );
             }
         }
 
         else if (
-            estado == Estado.CERRANDO
+            estado
+            == Estado.CERRANDO
         ) {
 
             hitbox.y -=
-                velocidad * delta;
+                velocidad
+                * delta;
 
             if (
-                hitbox.y <= yInicial
+                hitbox.y
+                <= yInicial
             ) {
 
                 hitbox.y =
@@ -124,15 +132,12 @@ public class Puerta {
 
                 estado =
                     Estado.CERRADA;
-
-                System.out.println(
-                    "PUERTA CERRADA"
-                );
             }
         }
 
         capa.setOffsetY(
-            yInicial - hitbox.y
+            yInicial
+            - hitbox.y
         );
     }
 
@@ -158,11 +163,14 @@ public class Puerta {
     public boolean bloqueaPaso() {
 
         return
-            estado == Estado.CERRADA
+            estado
+            == Estado.CERRADA
             ||
-            estado == Estado.ABRIENDO
+            estado
+            == Estado.ABRIENDO
             ||
-            estado == Estado.CERRANDO;
+            estado
+            == Estado.CERRANDO;
     }
 
     public void reiniciar() {

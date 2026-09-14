@@ -29,10 +29,13 @@ public class Ascensor {
         float yDestino
     ) {
 
-        this.capa = capa;
+        this.capa =
+            capa;
 
         this.hitbox =
-            new Rectangle(hitbox);
+            new Rectangle(
+                hitbox
+            );
 
         this.yInicial =
             hitbox.y;

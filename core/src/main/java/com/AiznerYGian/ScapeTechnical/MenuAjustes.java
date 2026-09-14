@@ -44,7 +44,8 @@ public class MenuAjustes {
         Audio audio
     ) {
 
-        this.audio = audio;
+        this.audio =
+            audio;
 
         imagen =
             new Texture(
@@ -274,7 +275,8 @@ public class MenuAjustes {
                 )
             ) {
 
-                return Accion.VOLVER;
+                return
+                    Accion.VOLVER;
             }
 
             else if (
@@ -320,7 +322,8 @@ public class MenuAjustes {
                 false;
         }
 
-        return Accion.NINGUNA;
+        return
+            Accion.NINGUNA;
     }
 
     private void cambiarVolumenSonido(

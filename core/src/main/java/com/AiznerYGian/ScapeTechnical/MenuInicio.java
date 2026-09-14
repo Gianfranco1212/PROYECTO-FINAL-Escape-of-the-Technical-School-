@@ -33,7 +33,8 @@ public class MenuInicio {
                 "menus/menuInicio.png"
             );
 
-        activo = true;
+        activo =
+            true;
 
         botonJugar =
             new Rectangle(
@@ -92,7 +93,8 @@ public class MenuInicio {
             )
         ) {
 
-            return Accion.NINGUNA;
+            return
+                Accion.NINGUNA;
         }
 
         Vector2 mouse =
@@ -110,7 +112,9 @@ public class MenuInicio {
                 mouse
             )
         ) {
-            return Accion.JUGAR;
+
+            return
+                Accion.JUGAR;
         }
 
         if (
@@ -118,7 +122,9 @@ public class MenuInicio {
                 mouse
             )
         ) {
-            return Accion.AJUSTES;
+
+            return
+                Accion.AJUSTES;
         }
 
         if (
@@ -126,25 +132,32 @@ public class MenuInicio {
                 mouse
             )
         ) {
-            return Accion.SALIR;
+
+            return
+                Accion.SALIR;
         }
 
-        return Accion.NINGUNA;
+        return
+            Accion.NINGUNA;
     }
 
     public boolean estaActivo() {
+
         return activo;
     }
 
     public void cerrar() {
+
         activo = false;
     }
 
     public void abrir() {
+
         activo = true;
     }
 
     public void dispose() {
+
         imagenMenu.dispose();
     }
 }

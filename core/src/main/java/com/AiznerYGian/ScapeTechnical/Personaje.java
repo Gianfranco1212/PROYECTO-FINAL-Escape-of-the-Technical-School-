@@ -54,8 +54,14 @@ public abstract class Personaje {
 
     protected int numeroJugador;
 
-    protected final float ANCHO_PANTALLA = 960;
-    protected final float ALTO_PANTALLA = 640;
+    protected final float ANCHO_PANTALLA =
+        960;
+
+    protected final float ALTO_PANTALLA =
+        640;
+
+    private MovimientoPersonaje movimiento;
+    private AnimacionPersonaje animacion;
 
     public Personaje(
         Mapa mapa,
@@ -71,9 +77,11 @@ public abstract class Personaje {
         int numeroJugador
     ) {
 
-        this.mapa = mapa;
+        this.mapa =
+            mapa;
 
-        this.audio = audio;
+        this.audio =
+            audio;
 
         this.numeroJugador =
             numeroJugador;
@@ -87,17 +95,23 @@ public abstract class Personaje {
             mapa.getAnchoTile();
 
         alto =
-            mapa.getAltoTile() * 2;
+            mapa.getAltoTile()
+            * 2;
 
-        x = xInicial;
-        y = yInicial;
+        x =
+            xInicial;
+
+        y =
+            yInicial;
 
         this.velocidad =
             velocidad;
 
-        velocidadY = 0;
+        velocidadY =
+            0;
 
-        gravedad = -900f;
+        gravedad =
+            -900f;
 
         this.fuerzaSalto =
             fuerzaSalto;
@@ -111,9 +125,11 @@ public abstract class Personaje {
         this.teclaSalto =
             teclaSalto;
 
-        enElSuelo = false;
+        enElSuelo =
+            false;
 
-        stateTime = 0;
+        stateTime =
+            0;
 
         hitbox =
             new Rectangle(
@@ -121,6 +137,16 @@ public abstract class Personaje {
                 y,
                 ancho,
                 alto
+            );
+
+        movimiento =
+            new MovimientoPersonaje(
+                this
+            );
+
+        animacion =
+            new AnimacionPersonaje(
+                this
             );
     }
 
@@ -134,23 +160,10 @@ public abstract class Personaje {
         float delta =
             Gdx.graphics.getDeltaTime();
 
-        moverHorizontal(
+        movimiento.actualizar(
             entrada,
-            delta,
-            otroPersonaje
-        );
-
-        aplicarGravedad(
-            delta,
-            otroPersonaje
-        );
-
-        saltar(
-            entrada
-        );
-
-        actualizarSonidoPasos(
-            entrada
+            otroPersonaje,
+            delta
         );
 
         frameActual =
@@ -159,486 +172,13 @@ public abstract class Personaje {
             );
     }
 
-    private void moverHorizontal(
-        Entrada entrada,
-        float delta,
-        Personaje otroPersonaje
-    ) {
-
-        float movimientoX = 0;
-
-        if (
-            entrada.teclaPresionada(
-                teclaIzquierda
-            )
-        ) {
-
-            movimientoX =
-                -velocidad * delta;
-        }
-
-        if (
-            entrada.teclaPresionada(
-                teclaDerecha
-            )
-        ) {
-
-            movimientoX =
-                velocidad * delta;
-        }
-
-        if (movimientoX == 0) {
-            return;
-        }
-
-        float xAnterior = x;
-
-        x += movimientoX;
-
-        if (x < 0) {
-            x = 0;
-        }
-
-        if (
-            x + ancho
-            > ANCHO_PANTALLA
-        ) {
-
-            x =
-                ANCHO_PANTALLA
-                - ancho;
-        }
-
-        actualizarHitbox();
-
-        for (
-            Rectangle colision :
-            mapa.getColisiones()
-        ) {
-
-            if (
-                hitbox.overlaps(
-                    colision
-                )
-            ) {
-
-                x = xAnterior;
-
-                actualizarHitbox();
-
-                break;
-            }
-        }
-
-        if (
-            mapa.colisionaConPuerta(
-                hitbox
-            )
-        ) {
-
-            x = xAnterior;
-
-            actualizarHitbox();
-        }
-
-        if (
-            otroPersonaje != null
-            &&
-            hitbox.overlaps(
-                otroPersonaje.getHitbox()
-            )
-        ) {
-
-            x = xAnterior;
-
-            actualizarHitbox();
-        }
-
-        if (enElSuelo) {
-
-            stateTime += delta;
-        }
-    }
-
-    private void aplicarGravedad(
-        float delta,
-        Personaje otroPersonaje
-    ) {
-
-        velocidadY +=
-            gravedad * delta;
-
-        float movimientoY =
-            velocidadY * delta;
-
-        float yAnterior =
-            y;
-
-        y += movimientoY;
-
-        actualizarHitbox();
-
-        enElSuelo = false;
-
-        for (
-            Rectangle colision :
-            mapa.getColisiones()
-        ) {
-
-            boolean coincideHorizontalmente =
-                hitbox.x
-                + hitbox.width
-                > colision.x
-                &&
-                hitbox.x
-                < colision.x
-                + colision.width;
-
-            if (
-                !coincideHorizontalmente
-            ) {
-                continue;
-            }
-
-            float piesAnteriores =
-                yAnterior;
-
-            float piesActuales =
-                y;
-
-            float cabezaAnterior =
-                yAnterior
-                + alto;
-
-            float cabezaActual =
-                y
-                + alto;
-
-            float parteSuperiorBloque =
-                colision.y
-                + colision.height;
-
-            float parteInferiorBloque =
-                colision.y;
-
-            if (
-                movimientoY < 0
-                &&
-                piesAnteriores
-                >= parteSuperiorBloque
-                &&
-                piesActuales
-                <= parteSuperiorBloque
-            ) {
-
-                y =
-                    parteSuperiorBloque;
-
-                velocidadY = 0;
-
-                enElSuelo = true;
-
-                actualizarHitbox();
-
-                break;
-            }
-
-            if (
-                movimientoY > 0
-                &&
-                cabezaAnterior
-                <= parteInferiorBloque
-                &&
-                cabezaActual
-                >= parteInferiorBloque
-            ) {
-
-                y =
-                    parteInferiorBloque
-                    - alto;
-
-                velocidadY = 0;
-
-                actualizarHitbox();
-
-                break;
-            }
-        }
-
-        comprobarAscensor(
-            mapa.getHitboxAscensorIzquierdo(),
-            movimientoY,
-            yAnterior
-        );
-
-        comprobarAscensor(
-            mapa.getHitboxAscensorDerecho(),
-            movimientoY,
-            yAnterior
-        );
-
-        if (
-            otroPersonaje != null
-            &&
-            hitbox.overlaps(
-                otroPersonaje.getHitbox()
-            )
-        ) {
-
-            if (
-                movimientoY < 0
-                &&
-                yAnterior
-                >= otroPersonaje.getY()
-                + otroPersonaje.getAlto()
-            ) {
-
-                y =
-                    otroPersonaje.getY()
-                    + otroPersonaje.getAlto();
-
-                velocidadY = 0;
-
-                enElSuelo = true;
-            }
-
-            else if (
-                movimientoY > 0
-                &&
-                yAnterior + alto
-                <= otroPersonaje.getY()
-            ) {
-
-                y =
-                    otroPersonaje.getY()
-                    - alto;
-
-                velocidadY = 0;
-            }
-
-            actualizarHitbox();
-        }
-
-        if (y <= 0) {
-
-            y = 0;
-
-            velocidadY = 0;
-
-            enElSuelo = true;
-
-            actualizarHitbox();
-        }
-
-        if (
-            y + alto
-            > ALTO_PANTALLA
-        ) {
-
-            y =
-                ALTO_PANTALLA
-                - alto;
-
-            velocidadY = 0;
-
-            actualizarHitbox();
-        }
-
-        if (!enElSuelo) {
-
-            stateTime += delta;
-        }
-    }
-
-    private void comprobarAscensor(
-        Rectangle ascensor,
-        float movimientoY,
-        float yAnterior
-    ) {
-
-        if (
-            ascensor == null
-        ) {
-
-            return;
-        }
-
-        boolean horizontal =
-            hitbox.x
-            + hitbox.width
-            > ascensor.x
-            &&
-            hitbox.x
-            < ascensor.x
-            + ascensor.width;
-
-        if (!horizontal) {
-            return;
-        }
-
-        float parteSuperiorAscensor =
-            ascensor.y
-            + ascensor.height;
-
-        float piesAnteriores =
-            yAnterior;
-
-        float piesActuales =
-            y;
-
-        if (
-            movimientoY <= 0
-            &&
-            piesAnteriores
-            >= parteSuperiorAscensor - 5f
-            &&
-            piesActuales
-            <= parteSuperiorAscensor
-        ) {
-
-            y =
-                parteSuperiorAscensor;
-
-            velocidadY = 0;
-
-            enElSuelo = true;
-
-            actualizarHitbox();
-        }
-    }
-
-    private void saltar(
-        Entrada entrada
-    ) {
-
-        if (
-            entrada.teclaJustoPresionada(
-                teclaSalto
-            )
-            &&
-            enElSuelo
-        ) {
-
-            velocidadY =
-                fuerzaSalto;
-
-            enElSuelo = false;
-
-            stateTime = 0;
-
-            audio.detenerPasos(
-                numeroJugador
-            );
-
-            audio.reproducirSalto();
-        }
-    }
-
-    private void actualizarSonidoPasos(
-        Entrada entrada
-    ) {
-
-        boolean moviendose =
-            entrada.teclaPresionada(
-                teclaIzquierda
-            )
-            ||
-            entrada.teclaPresionada(
-                teclaDerecha
-            );
-
-        if (
-            moviendose
-            &&
-            enElSuelo
-        ) {
-
-            audio.iniciarPasos(
-                numeroJugador
-            );
-
-        } else {
-
-            audio.detenerPasos(
-                numeroJugador
-            );
-        }
-    }
-
-    private void actualizarHitbox() {
-
-        hitbox.set(
-            x,
-            y,
-            ancho,
-            alto
-        );
-    }
-
     protected TextureRegion obtenerFrame(
         Entrada entrada
     ) {
 
-        if (!enElSuelo) {
-
-            if (
-                stateTime < 0.15f
-            ) {
-                return salto1;
-            }
-
-            if (
-                stateTime < 0.30f
-            ) {
-                return salto2;
-            }
-
-            if (
-                stateTime < 0.45f
-            ) {
-                return salto3;
-            }
-
-            return salto4;
-        }
-
-        if (
-            entrada.teclaPresionada(
-                teclaIzquierda
-            )
-        ) {
-
-            if (
-                (int) (
-                    stateTime * 8
-                ) % 2 == 0
-            ) {
-
-                return caminarIzquierda1;
-            }
-
-            return caminarIzquierda2;
-        }
-
-        if (
-            entrada.teclaPresionada(
-                teclaDerecha
-            )
-        ) {
-
-            if (
-                (int) (
-                    stateTime * 8
-                ) % 2 == 0
-            ) {
-
-                return caminarDerecha1;
-            }
-
-            return caminarDerecha2;
-        }
-
-        return idle;
+        return animacion.obtenerFrame(
+            entrada
+        );
     }
 
     public void dibujar(
@@ -654,13 +194,15 @@ public abstract class Personaje {
 
         batch.begin();
 
-        float offsetY = 0;
+        float offsetY =
+            0;
 
         if (
             this instanceof Gian
         ) {
 
-            offsetY = -3f;
+            offsetY =
+                -3f;
         }
 
         batch.draw(
@@ -678,11 +220,8 @@ public abstract class Personaje {
         float movimientoY
     ) {
 
-        y += movimientoY;
-
-        hitbox.setPosition(
-            x,
-            y
+        movimiento.moverConAscensor(
+            movimientoY
         );
     }
 

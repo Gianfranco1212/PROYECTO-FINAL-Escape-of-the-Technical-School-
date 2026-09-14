@@ -98,7 +98,8 @@ public class MenuPausa {
             )
         ) {
 
-            return Accion.NINGUNA;
+            return
+                Accion.NINGUNA;
         }
 
         Vector2 mouse =
@@ -116,7 +117,9 @@ public class MenuPausa {
                 mouse
             )
         ) {
-            return Accion.REANUDAR;
+
+            return
+                Accion.REANUDAR;
         }
 
         if (
@@ -124,7 +127,9 @@ public class MenuPausa {
                 mouse
             )
         ) {
-            return Accion.REINICIAR;
+
+            return
+                Accion.REINICIAR;
         }
 
         if (
@@ -132,7 +137,9 @@ public class MenuPausa {
                 mouse
             )
         ) {
-            return Accion.AJUSTES;
+
+            return
+                Accion.AJUSTES;
         }
 
         if (
@@ -140,13 +147,17 @@ public class MenuPausa {
                 mouse
             )
         ) {
-            return Accion.MENU_PRINCIPAL;
+
+            return
+                Accion.MENU_PRINCIPAL;
         }
 
-        return Accion.NINGUNA;
+        return
+            Accion.NINGUNA;
     }
 
     public void dispose() {
+
         imagenPausa.dispose();
     }
 }

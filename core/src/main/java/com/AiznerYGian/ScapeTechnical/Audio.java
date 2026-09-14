@@ -23,37 +23,53 @@ public class Audio {
 
     public Audio() {
 
-        musicaNivel = Gdx.audio.newMusic(
-            Gdx.files.internal(
-                "Audios/musica_nivel.mp3"
-            )
+        musicaNivel =
+            Gdx.audio.newMusic(
+                Gdx.files.internal(
+                    "Audios/musica_nivel.mp3"
+                )
+            );
+
+        sonidoSalto =
+            Gdx.audio.newSound(
+                Gdx.files.internal(
+                    "Audios/salto.mp3"
+                )
+            );
+
+        sonidoPasos =
+            Gdx.audio.newSound(
+                Gdx.files.internal(
+                    "Audios/pasos.mp3"
+                )
+            );
+
+        volumenEfectos =
+            0.70f;
+
+        volumenMusica =
+            0.50f;
+
+        musicaNivel.setLooping(
+            true
         );
 
-        sonidoSalto = Gdx.audio.newSound(
-            Gdx.files.internal(
-                "Audios/salto.mp3"
-            )
+        musicaNivel.setVolume(
+            volumenMusica
         );
 
-        sonidoPasos = Gdx.audio.newSound(
-            Gdx.files.internal(
-                "Audios/pasos.mp3"
-            )
-        );
+        pasosAznActivos =
+            false;
 
-        volumenEfectos = 0.70f;
-        volumenMusica = 0.50f;
-
-        musicaNivel.setLooping(true);
-        musicaNivel.setVolume(volumenMusica);
-
-        pasosAznActivos = false;
-        pasosGianActivos = false;
+        pasosGianActivos =
+            false;
     }
 
     public void reproducirMusicaNivel() {
 
-        if (!musicaNivel.isPlaying()) {
+        if (
+            !musicaNivel.isPlaying()
+        ) {
 
             musicaNivel.play();
         }
@@ -66,7 +82,9 @@ public class Audio {
 
     public void pausarMusicaNivel() {
 
-        if (musicaNivel.isPlaying()) {
+        if (
+            musicaNivel.isPlaying()
+        ) {
 
             musicaNivel.pause();
         }
@@ -83,26 +101,39 @@ public class Audio {
         int jugador
     ) {
 
-        if (jugador == 1) {
+        if (
+            jugador == 1
+        ) {
 
-            if (!pasosAznActivos) {
+            if (
+                !pasosAznActivos
+            ) {
 
-                pasosAznId = sonidoPasos.loop(
-                    volumenEfectos
-                );
+                pasosAznId =
+                    sonidoPasos.loop(
+                        volumenEfectos
+                    );
 
-                pasosAznActivos = true;
+                pasosAznActivos =
+                    true;
             }
+        }
 
-        } else if (jugador == 2) {
+        else if (
+            jugador == 2
+        ) {
 
-            if (!pasosGianActivos) {
+            if (
+                !pasosGianActivos
+            ) {
 
-                pasosGianId = sonidoPasos.loop(
-                    volumenEfectos
-                );
+                pasosGianId =
+                    sonidoPasos.loop(
+                        volumenEfectos
+                    );
 
-                pasosGianActivos = true;
+                pasosGianActivos =
+                    true;
             }
         }
     }
@@ -111,34 +142,50 @@ public class Audio {
         int jugador
     ) {
 
-        if (jugador == 1) {
+        if (
+            jugador == 1
+        ) {
 
-            if (pasosAznActivos) {
+            if (
+                pasosAznActivos
+            ) {
 
                 sonidoPasos.stop(
                     pasosAznId
                 );
 
-                pasosAznActivos = false;
+                pasosAznActivos =
+                    false;
             }
+        }
 
-        } else if (jugador == 2) {
+        else if (
+            jugador == 2
+        ) {
 
-            if (pasosGianActivos) {
+            if (
+                pasosGianActivos
+            ) {
 
                 sonidoPasos.stop(
                     pasosGianId
                 );
 
-                pasosGianActivos = false;
+                pasosGianActivos =
+                    false;
             }
         }
     }
 
     public void detenerTodosLosPasos() {
 
-        detenerPasos(1);
-        detenerPasos(2);
+        detenerPasos(
+            1
+        );
+
+        detenerPasos(
+            2
+        );
     }
 
     public void setVolumenEfectos(
@@ -152,7 +199,9 @@ public class Audio {
                 1f
             );
 
-        if (pasosAznActivos) {
+        if (
+            pasosAznActivos
+        ) {
 
             sonidoPasos.setVolume(
                 pasosAznId,
@@ -160,7 +209,9 @@ public class Audio {
             );
         }
 
-        if (pasosGianActivos) {
+        if (
+            pasosGianActivos
+        ) {
 
             sonidoPasos.setVolume(
                 pasosGianId,
@@ -198,7 +249,9 @@ public class Audio {
     public void dispose() {
 
         musicaNivel.dispose();
+
         sonidoSalto.dispose();
+
         sonidoPasos.dispose();
     }
 }

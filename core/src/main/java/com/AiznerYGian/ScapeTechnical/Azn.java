@@ -26,19 +26,21 @@ public class Azn extends Personaje {
 
         crearSprites();
 
-        frameActual = idle;
+        frameActual =
+            idle;
     }
 
     @Override
     protected void crearSprites() {
 
-        idle = new TextureRegion(
-            spriteSheet,
-            20,
-            42,
-            220,
-            298
-        );
+        idle =
+            new TextureRegion(
+                spriteSheet,
+                20,
+                42,
+                220,
+                298
+            );
 
         caminarIzquierda1 =
             new TextureRegion(

@@ -27,11 +27,13 @@ public class MenuVictoria {
 
     public MenuVictoria() {
 
-        imagen = new Texture(
-            "menus/menu_victoria.png"
-        );
+        imagen =
+            new Texture(
+                "menus/menu_victoria.png"
+            );
 
-        fuente = new BitmapFont();
+        fuente =
+            new BitmapFont();
 
         fuente.getData().setScale(
             1.6f
@@ -51,8 +53,11 @@ public class MenuVictoria {
         int monedas
     ) {
 
-        tiempoFinal = tiempo;
-        monedasFinales = monedas;
+        tiempoFinal =
+            tiempo;
+
+        monedasFinales =
+            monedas;
     }
 
     public void dibujar(
@@ -78,10 +83,12 @@ public class MenuVictoria {
             (int) tiempoFinal;
 
         int minutos =
-            totalSegundos / 60;
+            totalSegundos
+            / 60;
 
         int segundos =
-            totalSegundos % 60;
+            totalSegundos
+            % 60;
 
         String tiempo =
             String.format(
@@ -99,7 +106,8 @@ public class MenuVictoria {
 
         fuente.draw(
             batch,
-            monedasFinales + "/6",
+            monedasFinales
+                + "/6",
             600,
             315
         );
@@ -116,7 +124,9 @@ public class MenuVictoria {
                 Input.Buttons.LEFT
             )
         ) {
-            return Accion.NINGUNA;
+
+            return
+                Accion.NINGUNA;
         }
 
         Vector2 mouse =
@@ -134,14 +144,19 @@ public class MenuVictoria {
                 mouse
             )
         ) {
-            return Accion.MENU_PRINCIPAL;
+
+            return
+                Accion.MENU_PRINCIPAL;
         }
 
-        return Accion.NINGUNA;
+        return
+            Accion.NINGUNA;
     }
 
     public void dispose() {
+
         imagen.dispose();
+
         fuente.dispose();
     }
 }

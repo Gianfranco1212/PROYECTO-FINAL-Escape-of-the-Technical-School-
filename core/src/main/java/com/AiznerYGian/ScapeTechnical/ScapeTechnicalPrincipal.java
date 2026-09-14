@@ -9,8 +9,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class ScapeTechnicalPrincipal
-    extends ApplicationAdapter {
+public class ScapeTechnicalPrincipal extends ApplicationAdapter {
 
     private Mapa mapa;
 
@@ -41,15 +40,13 @@ public class ScapeTechnicalPrincipal
     @Override
     public void create() {
 
-        camera =
-            new OrthographicCamera();
+        camera = new OrthographicCamera();
 
-        viewport =
-            new FitViewport(
-                960,
-                640,
-                camera
-            );
+        viewport = new FitViewport(
+            960,
+            640,
+            camera
+        );
 
         viewport.apply();
 
@@ -61,57 +58,44 @@ public class ScapeTechnicalPrincipal
 
         camera.update();
 
-        batch =
-            new SpriteBatch();
+        batch = new SpriteBatch();
 
-        entrada =
-            new Entrada();
+        entrada = new Entrada();
 
-        audio =
-            new Audio();
+        audio = new Audio();
 
-        menuInicio =
-            new MenuInicio();
+        menuInicio = new MenuInicio();
 
-        menuPausa =
-            new MenuPausa();
+        menuPausa = new MenuPausa();
 
-        menuAjustes =
-            new MenuAjustes(
-                audio
-            );
+        menuAjustes = new MenuAjustes(
+            audio
+        );
 
-        menuVictoria =
-            new MenuVictoria();
+        menuVictoria = new MenuVictoria();
 
         crearNivel();
 
         pausado = false;
-
         enAjustes = false;
-
         victoria = false;
     }
 
     private void crearNivel() {
 
-        mapa =
-            new Mapa();
+        mapa = new Mapa();
 
-        azn =
-            new Azn(
-                mapa,
-                audio
-            );
+        azn = new Azn(
+            mapa,
+            audio
+        );
 
-        gian =
-            new Gian(
-                mapa,
-                audio
-            );
+        gian = new Gian(
+            mapa,
+            audio
+        );
 
-        hud =
-            new HUD();
+        hud = new HUD();
 
         hud.resize(
             Gdx.graphics.getWidth(),
@@ -123,27 +107,23 @@ public class ScapeTechnicalPrincipal
 
         audio.detenerTodosLosPasos();
 
-        if (
-            azn != null
-        ) {
+        if (azn != null) {
+
             azn.dispose();
         }
 
-        if (
-            gian != null
-        ) {
+        if (gian != null) {
+
             gian.dispose();
         }
 
-        if (
-            mapa != null
-        ) {
+        if (mapa != null) {
+
             mapa.dispose();
         }
 
-        if (
-            hud != null
-        ) {
+        if (hud != null) {
+
             hud.dispose();
         }
     }
@@ -181,9 +161,7 @@ public class ScapeTechnicalPrincipal
 
         camera.update();
 
-        if (
-            victoria
-        ) {
+        if (victoria) {
 
             menuVictoria.dibujar(
                 batch,
@@ -198,8 +176,7 @@ public class ScapeTechnicalPrincipal
             if (
                 accion
                 ==
-                MenuVictoria.Accion
-                    .MENU_PRINCIPAL
+                MenuVictoria.Accion.MENU_PRINCIPAL
             ) {
 
                 victoria = false;
@@ -214,9 +191,7 @@ public class ScapeTechnicalPrincipal
             return;
         }
 
-        if (
-            enAjustes
-        ) {
+        if (enAjustes) {
 
             menuAjustes.dibujar(
                 batch,
@@ -239,8 +214,7 @@ public class ScapeTechnicalPrincipal
                 if (
                     menuAjustes.getOrigen()
                     ==
-                    MenuAjustes.Origen
-                        .MENU_INICIO
+                    MenuAjustes.Origen.MENU_INICIO
                 ) {
 
                     menuInicio.abrir();
@@ -254,9 +228,7 @@ public class ScapeTechnicalPrincipal
             return;
         }
 
-        if (
-            menuInicio.estaActivo()
-        ) {
+        if (menuInicio.estaActivo()) {
 
             menuInicio.dibujar(
                 batch,
@@ -290,8 +262,7 @@ public class ScapeTechnicalPrincipal
                 enAjustes = true;
 
                 menuAjustes.abrirDesde(
-                    MenuAjustes.Origen
-                        .MENU_INICIO
+                    MenuAjustes.Origen.MENU_INICIO
                 );
             }
 
@@ -313,12 +284,9 @@ public class ScapeTechnicalPrincipal
             )
         ) {
 
-            pausado =
-                !pausado;
+            pausado = !pausado;
 
-            if (
-                pausado
-            ) {
+            if (pausado) {
 
                 audio.detenerTodosLosPasos();
 
@@ -330,9 +298,7 @@ public class ScapeTechnicalPrincipal
             }
         }
 
-        if (
-            pausado
-        ) {
+        if (pausado) {
 
             dibujarJuego();
 
@@ -377,16 +343,14 @@ public class ScapeTechnicalPrincipal
                 enAjustes = true;
 
                 menuAjustes.abrirDesde(
-                    MenuAjustes.Origen
-                        .MENU_PAUSA
+                    MenuAjustes.Origen.MENU_PAUSA
                 );
             }
 
             else if (
                 accion
                 ==
-                MenuPausa.Accion
-                    .MENU_PRINCIPAL
+                MenuPausa.Accion.MENU_PRINCIPAL
             ) {
 
                 pausado = false;
@@ -459,6 +423,10 @@ public class ScapeTechnicalPrincipal
 
     private void dibujarJuego() {
 
+        viewport.apply();
+
+        camera.update();
+
         mapa.dibujar(
             camera
         );
@@ -495,9 +463,7 @@ public class ScapeTechnicalPrincipal
             true
         );
 
-        if (
-            hud != null
-        ) {
+        if (hud != null) {
 
             hud.resize(
                 width,
@@ -521,7 +487,7 @@ public class ScapeTechnicalPrincipal
 
         audio.dispose();
 
-        entrada.dispose();
+        entrada.cerrarScanner();
 
         batch.dispose();
     }
